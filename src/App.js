@@ -5,18 +5,20 @@ import {
     RouterProvider,
   } from "react-router-dom";
 
-import Home from "./Home";
-import About from "./About";
-import Vans from "./Vans";
-import VanDetail from "./VanDetail";
-import Dashboard from "./Dashboard";
-import Income from "./Income";
-import Reviews from "./Reviews";
-import HostLayout from "./HostLayout";
-import Layout from "./Layout";
-import HostVans from "./HostVans";
-import HostVansDetail from "./HostVansDetail";
-import DetailLayout from "./DetailLayout";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Vans from "./pages/Vans";
+import VanDetail from "./pages/VanDetail";
+import Dashboard from "./pages/Dashboard";
+import Income from "./pages/Income";
+import Reviews from "./pages/Reviews";
+import HostLayout from "./layout/HostLayout";
+import Layout from "./layout/Layout";
+import HostVans from "./pages/HostVans";
+import HostVansDetail from "./pages/HostVansDetail";
+import DetailLayout from "./layout/DetailLayout";
+
+import NamesProvider from "./context/NamesProvider";
 
 
 const router = createBrowserRouter(
@@ -48,7 +50,9 @@ const router = createBrowserRouter(
 
 function App() {
   return (
-    <RouterProvider router={router} />
+    <NamesProvider>
+      <RouterProvider router={router} />
+    </NamesProvider>
   );
 }
 

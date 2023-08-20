@@ -1,0 +1,73 @@
+.vans_page {
+  background-color: #fff7ed;
+  padding: 16px;
+  width: 100%;
+}
+
+.title {
+  color: #161616;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.card_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.card {
+  width: 190px;
+}
+
+.img_box {
+  overflow: hidden;
+  border-radius: 3px;
+  width: 100%px;
+  height: 190px;
+}
+
+.card_img {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 3px;
+}
+
+.name,
+.price {
+  color: #161616;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.name_price_box,
+.type_day_box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.type_day_box button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  /* background: #e17654; */
+
+  color: #ffead0;
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 12px;
+  cursor: pointer;
+}
+
+.type_day_box p {
+  color: #161616;
+  font-size: 14px;
+  font-weight: 500;
+  align-self: self-start;
+}
