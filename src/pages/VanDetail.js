@@ -1,9 +1,21 @@
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+// CSS
+import css from "./VanDetail.module.css";
 
 export default function VanDetail() {
+  const { id } = useParams();
+
+  const [van, setVan] = useState(null);
+  useEffect(() => {
+    fetch(`/api/vans/${id}`)
+      .then((res) => res.json())
+      .then((data) => setVan(data.vans));
+  }, [id]);
+
   return (
-    <article>
-      <Link to="../">
+    <article className={css.container}>
+      <Link to="/vans" className={css.back}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="14"
@@ -19,12 +31,32 @@ export default function VanDetail() {
         Back to all vans
       </Link>
 
-      <img src="" alt="" />
-      <button></button>
-      <h3></h3>
-      <h4></h4>
-      <p></p>
-      <button>Rent this van</button>
+      {van ? (
+        <div className={css.box}>
+          <img src={van.imageUrl} alt="" />
+          <button
+            style={{
+              backgroundColor:
+                van.type === "simple"
+                  ? "#E17654"
+                  : van.type === "rugged"
+                  ? "#115E59"
+                  : "#161616",
+            }}
+          >
+            {van.type}
+          </button>
+          <h3>{van.name}</h3>
+          <h4>
+            ${van.price}
+            <span>/day</span>
+          </h4>
+          <p>{van.description}</p>
+          <button className={css.rent_btn}>Rent this van</button>
+        </div>
+      ) : (
+        <h2 style={{textAlign: "center", marginTop: "54px"}}>Loading...</h2>
+      )}
     </article>
   );
 }

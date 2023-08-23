@@ -3,7 +3,7 @@
   background-image: url("../assets/images/home-hero.png");
   background-position: center;
   background-size: cover;
-  height: calc(100vh - 149px);
+  height: calc(100vh - 148px);
 }
 
 .title {

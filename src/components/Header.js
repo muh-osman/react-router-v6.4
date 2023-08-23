@@ -9,7 +9,7 @@ export default function Header() {
 
             <nav className={css.main_nav}>
               {/* <NavLink to=".">Home</NavLink> */}
-              {/* <NavLink to="host">Host</NavLink> */}
+              <NavLink to="host" className={css.nav_link}>Host</NavLink>
               <NavLink to="about" className={css.nav_link} >About</NavLink>
               <NavLink to="vans" className={css.nav_link} >Vans</NavLink>
             </nav>

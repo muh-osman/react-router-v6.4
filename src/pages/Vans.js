@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import css from "./Vans.module.css";
 
 export default function Vans() {
-  const [vans, setVans] = useState([]);
+  const [vans, setVans] = useState(null);
 
   useEffect(() => {
     fetch("/api/vans")
@@ -12,8 +12,8 @@ export default function Vans() {
       .then((data) => setVans(data.vans));
   }, []);
 
-  const vanElements = vans.map(
-    ({ id, name, price, description, imageUrl, type, hostId }) => (
+  const vanElements = vans ? (
+    vans.map(({ id, name, price, imageUrl, type }) => (
       <Link to={id} key={id} className={css.card}>
         <div className={css.img_box}>
           <img src={imageUrl} alt={name} className={css.card_img} />
@@ -39,7 +39,9 @@ export default function Vans() {
           <p>/day</p>
         </div>
       </Link>
-    )
+    ))
+  ) : (
+    <h1>Loading...</h1>
   );
 
   return (

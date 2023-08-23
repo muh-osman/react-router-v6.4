@@ -15,9 +15,11 @@ import Reviews from "./pages/Reviews";
 import HostLayout from "./layout/HostLayout";
 import Layout from "./layout/Layout";
 import HostVans from "./pages/HostVans";
-import HostVansDetail from "./pages/HostVansDetail";
+import HostVanDetail from "./pages/HostVanDetail";
 import DetailLayout from "./layout/DetailLayout";
-
+import HostVanPhotos from "./pages/HostVanPhotos";
+import HostVanPricing from "./pages/HostVanPricing";
+// 
 import NamesProvider from "./context/NamesProvider";
 
 
@@ -35,11 +37,11 @@ const router = createBrowserRouter(
                         <Route path="reviews" element={<Reviews />} />
                         <Route path="vans" element={<HostVans />} />
 
-                              <Route path="vans/:id" element={<DetailLayout/>}>
-                                <Route index element={<HostVansDetail />} />
-                                <Route path="pricing" element={<h1>Pricing</h1>} />
-                                <Route path="photos" element={<h1>Photos</h1>} />
-                              </Route>
+                        <Route path="vans/:id" element={<DetailLayout/>}>
+                            <Route index element={<HostVanDetail />} />
+                            <Route path="pricing" element={<HostVanPricing />} />
+                            <Route path="photos" element={<HostVanPhotos />} />
+                        </Route>
                     </Route>
 
                     <Route path="*" element={<h1>404 Page</h1>} />

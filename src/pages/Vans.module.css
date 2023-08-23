@@ -2,6 +2,7 @@
   background-color: #fff7ed;
   padding: 16px;
   width: 100%;
+  min-height: calc(100vh - 148px);
 }
 
 .title {
@@ -28,12 +29,13 @@
 .img_box {
   overflow: hidden;
   border-radius: 3px;
-  width: 100%px;
+  width: 100%;
   height: 190px;
 }
 
 .card_img {
   width: 100%;
+  height: 190px;
   overflow: hidden;
   border-radius: 3px;
 }
@@ -56,8 +58,6 @@
   padding: 8px 16px;
   border: none;
   border-radius: 5px;
-  /* background: #e17654; */
-
   color: #ffead0;
   font-size: 15px;
   font-weight: 600;

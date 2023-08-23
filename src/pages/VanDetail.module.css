@@ -1,0 +1,79 @@
+.container {
+  width: 100%;
+  background-color: #fff7ed;
+  padding: 16px;
+  min-height: calc(100vh - 148px);
+}
+
+.container svg {
+  margin-right: 9px;
+}
+
+.back {
+  text-decoration: underline;
+  color: #201f1d;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.back:hover {
+  color: #000;
+}
+
+.box {
+  width: 100%;
+}
+
+.box img {
+  width: 100%;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.box button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  color: #ffead0;
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 12px;
+  cursor: pointer;
+  margin-bottom: 16px;
+}
+
+.box h3 {
+  color: #161616;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+
+.box h4 {
+  color: #161616;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.box span {
+  color: #161616;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 9px;
+}
+
+.box p {
+    color: #4d4d4d;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.rent_btn {
+    width: 100%;
+    border-radius: 5px;
+    background: #ff8c38;
+    height: 50px;
+    margin-bottom: 24px !important;
+    margin-top: 40px !important;
+}

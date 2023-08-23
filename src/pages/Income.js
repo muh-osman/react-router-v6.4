@@ -1,41 +1,42 @@
-import { useReducer } from "react"
+import "./Income.css"
 
 export default function Income() {
 
 
-  const initState = {
-    count: 0
-  }
-
-  const reduser = (state, action) => {
-    switch (action.type) {
-      case "up":
-        return {count: state.count + 1}
-      case "down":
-        return {count: state.count - 1}
-
-    }
-  }
-
-  const [state, dispatch] = useReducer(reduser, initState)
+  const transactionsData = [
+    { amount: 720, date: "Jan 3, '23", id: "1" },
+    { amount: 560, date: "Dec 12, '22", id: "2" },
+    { amount: 980, date: "Dec 3, '22", id: "3" },
+  ];
 
 
-  const handleSubmit =(e) => {
-    e.preventDefault()
-  }
 
   return (
-    <>
-      <div>{state.count}</div>
-
-      <button onClick={()=> dispatch({type: "up"})}>UP</button>
-      <button onClick={()=> dispatch({type: "down"})}>Down</button>
-
-      <form onSubmit={handleSubmit}>
-        <input type="text"  required/>
-        <button type="submit">submit</button>
-      </form>
-    
-    </>
-  )
+    <section className="host-income">
+      <h1>Income</h1>
+      <p>
+        Last <span>30 days</span>
+      </p>
+      <h2>$2,260</h2>
+      <img
+        className="graphs"
+        src={require("../assets/images/income-graph.png")}
+        alt="Income graph"
+      />
+      <div className="info-header">
+        <h3>Your transactions (3)</h3>
+        <p>
+          Last <span>30 days</span>
+        </p>
+      </div>
+      <div className="transactions">
+        {transactionsData.map((item) => (
+          <div key={item.id} className="transaction">
+            <h3>${item.amount}</h3>
+            <p>{item.date}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
 }
