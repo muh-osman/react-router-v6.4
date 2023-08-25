@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 // CSS
 import css from "./VanDetail.module.css";
 
-export default function VanDetail() {
+export default function VanDetail(props) {
   const { id } = useParams();
+  let location = useLocation();
+  const urlParam = location.state?.paramType;
+  console.log(urlParam);
 
   const [van, setVan] = useState(null);
   useEffect(() => {
+    window.scrollTo(0, 0);
+    
     fetch(`/api/vans/${id}`)
       .then((res) => res.json())
       .then((data) => setVan(data.vans));
@@ -15,7 +20,11 @@ export default function VanDetail() {
 
   return (
     <article className={css.container}>
-      <Link to="/vans" className={css.back}>
+      <Link
+        to={urlParam ? "..?type=" + urlParam : ".."}
+        relative="path"
+        className={css.back}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="14"
@@ -28,7 +37,7 @@ export default function VanDetail() {
             fill="#858585"
           />
         </svg>
-        Back to all vans
+        Back to {urlParam ? urlParam : "all"} vans
       </Link>
 
       {van ? (
@@ -55,7 +64,7 @@ export default function VanDetail() {
           <button className={css.rent_btn}>Rent this van</button>
         </div>
       ) : (
-        <h2 style={{textAlign: "center", marginTop: "54px"}}>Loading...</h2>
+        <h2 style={{ textAlign: "center", marginTop: "54px" }}>Loading...</h2>
       )}
     </article>
   );

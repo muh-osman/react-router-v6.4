@@ -19,6 +19,7 @@ import HostVanDetail from "./pages/HostVanDetail";
 import DetailLayout from "./layout/DetailLayout";
 import HostVanPhotos from "./pages/HostVanPhotos";
 import HostVanPricing from "./pages/HostVanPricing";
+import NotFound from "./pages/NotFound";
 // 
 import NamesProvider from "./context/NamesProvider";
 
@@ -44,7 +45,8 @@ const router = createBrowserRouter(
                         </Route>
                     </Route>
 
-                    <Route path="*" element={<h1>404 Page</h1>} />
+                    <Route path="*" element={<NotFound />} />
+
             </Route>
     )
   );

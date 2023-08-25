@@ -9,6 +9,7 @@
   color: #161616;
   font-size: 32px;
   font-weight: 700;
+  margin-bottom: 24px;
 }
 
 .card_container {
@@ -17,13 +18,14 @@
   justify-content: center;
   gap: 16px;
   flex-wrap: wrap;
-  margin-top: 32px;
+  margin-top: 18px;
   overflow: hidden;
   width: 100%;
 }
 
 .card {
   width: 190px;
+  margin-bottom: 16px;
 }
 
 .img_box {
@@ -31,6 +33,7 @@
   border-radius: 3px;
   width: 100%;
   height: 190px;
+  margin-bottom: 6px;
 }
 
 .card_img {
@@ -70,4 +73,42 @@
   font-size: 14px;
   font-weight: 500;
   align-self: self-start;
+}
+
+.filterBtn {
+  cursor: pointer;
+  background-color: #ffead0;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.filterBtnBox {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.simple:hover,
+.simple.selected {
+  background-color: #e17654;
+  color: #fff;
+}
+
+.rugged:hover,
+.rugged.selected {
+  background-color: #115e59;
+  color: #fff;
+}
+
+.luxury:hover,
+.luxury.selected {
+  background-color: #161616;
+  color: #fff;
+}
+
+.all {
+  background-color: transparent;
+  text-decoration: underline;
 }
