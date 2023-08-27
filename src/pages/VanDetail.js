@@ -7,7 +7,6 @@ export default function VanDetail(props) {
   const { id } = useParams();
   let location = useLocation();
   const urlParam = location.state?.paramType;
-  console.log(urlParam);
 
   const [van, setVan] = useState(null);
   useEffect(() => {

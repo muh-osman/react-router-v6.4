@@ -1,15 +1,21 @@
 import { useState, useEffect } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useLoaderData } from "react-router-dom";
 // CSS
 import css from "./Vans.module.css";
+// api
+import { getVans } from "../api";
+
+export const loader = () => {
+  return getVans()
+};
 
 export default function Vans() {
-  const [vans, setVans] = useState(null);
+  const [error, setError] = useState(null);
+
+  const vans = useLoaderData()
 
   useEffect(() => {
-    fetch("/api/vans")
-      .then((res) => res.json())
-      .then((data) => setVans(data.vans));
+    window.scrollTo(0, 0);
   }, []);
 
   // Filter
@@ -21,42 +27,45 @@ export default function Vans() {
     : vans;
 
   // Map on Vans
-  const vanElements = vans ? (
-    vansAfterFiltered.map(({ id, name, price, imageUrl, type }) => (
-      <Link
-        to={id}
-        key={id}
-        className={css.card}
-        state={{ paramType: typeFilter }}
-      >
-        <div className={css.img_box}>
-          <img src={imageUrl} alt={name} className={css.card_img} />
-        </div>
-        <div className={css.name_price_box}>
-          <p className={css.name}>{name}</p>
-          <p className={css.price}>${price}</p>
-        </div>
-        <div className={css.type_day_box}>
-          <button
-            style={{
-              backgroundColor:
-                type === "simple"
-                  ? "#E17654"
-                  : type === "rugged"
-                  ? "#115E59"
-                  : "#161616",
-            }}
-          >
-            {type}
-          </button>
+  const vanElements =
+    vans && !error ? (
+      vansAfterFiltered.map(({ id, name, price, imageUrl, type }) => (
+        <Link
+          to={id}
+          key={id}
+          className={css.card}
+          state={{ paramType: typeFilter }}
+        >
+          <div className={css.img_box}>
+            <img src={imageUrl} alt={name} className={css.card_img} />
+          </div>
+          <div className={css.name_price_box}>
+            <p className={css.name}>{name}</p>
+            <p className={css.price}>${price}</p>
+          </div>
+          <div className={css.type_day_box}>
+            <button
+              style={{
+                backgroundColor:
+                  type === "simple"
+                    ? "#E17654"
+                    : type === "rugged"
+                    ? "#115E59"
+                    : "#161616",
+              }}
+            >
+              {type}
+            </button>
 
-          <p>/day</p>
-        </div>
-      </Link>
-    ))
-  ) : (
-    <h1>Loading...</h1>
-  );
+            <p>/day</p>
+          </div>
+        </Link>
+      ))
+    ) : error ? (
+      <h1>Error: {error.message}</h1>
+    ) : (
+      <h1>Loading...</h1>
+    );
 
   return (
     <article className={css.vans_page}>
