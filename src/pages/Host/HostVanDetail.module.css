@@ -1,0 +1,11 @@
+.host_van_detail_info h4 {
+  margin-bottom: 12px;
+}
+.host_van_detail_info span {
+  color: #161616;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none !important;
+}
+
+

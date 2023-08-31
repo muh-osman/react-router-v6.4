@@ -1,7 +1,7 @@
 import React from "react";
 import "./Reviews.css"
 // Image
-import image from "../assets/images/reviews-graph.png"
+import image from "../../assets/images/reviews-graph.png"
 
 
 export default function Reviews() {

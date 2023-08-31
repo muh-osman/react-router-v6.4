@@ -1,7 +1,7 @@
 .container {
     padding: 16px;
     background-color: #fff7ed;
-    min-height: 509px;
+    min-height: 481px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -14,7 +14,6 @@
 }
 
 .link {
-    display: inline-block;
     padding: 16px;
     height: 55px;
     width: 100%;

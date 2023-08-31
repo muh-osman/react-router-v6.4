@@ -1,0 +1,45 @@
+.container {
+  background-color: #fff7ed;
+  padding: 16px;
+  min-height: 409px;
+}
+
+.container img {
+  width: 78px;
+  border-radius: 3px;
+}
+
+.container h1 {
+  margin-bottom: 16px;
+}
+
+.container h3 {
+  color: #292929;
+}
+
+.container p {
+  color: #4d4d4d;
+  font-weight: 500;
+}
+
+.host_vans_list a {
+  margin-bottom: 12px;
+  display: block;
+}
+
+.host_vans_list div {
+  background-color: #fff;
+  display: flex;
+  padding: 16px;
+}
+
+.host_van_info {
+  display: flex;
+  flex-direction: column;
+}
+
+.host_van_single {
+  display: flex;
+  align-items: center;
+  border-radius: 7px;
+}

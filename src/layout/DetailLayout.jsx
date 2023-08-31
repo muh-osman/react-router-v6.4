@@ -1,4 +1,5 @@
 import React from "react";
+import css from "./DetailLayout.module.css"
 import {
   useParams,
   useLoaderData,
@@ -8,14 +9,25 @@ import {
   defer,
   Await,
 } from "react-router-dom";
-import { getVan } from "../api/firebase";
+// Fetch Data
+import { getHostVans } from "../api";
+// Protect Route
+import { requireAuth } from "../utils";
+// import { getVan } from "../api/firebase";
 
-export function loader({ params }) {
-  return defer({ van: getVan(params.id) });
+
+// export function loader({ params }) {
+//   return defer({ van: getVan(params.id) });
+// }
+
+export async function loader({ params }) {
+  await requireAuth()
+  return getHostVans(params.id);
 }
 
 export default function DetailLayout() {
-  const loaderData = useLoaderData();
+  const currentVan = useLoaderData();
+
 
   const activeStyles = {
     fontWeight: "bold",
@@ -24,17 +36,17 @@ export default function DetailLayout() {
   };
 
   return (
-    <section>
-      <Link to=".." relative="path" className="back-button">
+    <section className={css.container}>
+       <Link to=".." relative="path" className="back-button">
         &larr; <span>Back to all vans</span>
       </Link>
-      <React.Suspense fallback={<h2>Loading...</h2>}>
-        <Await resolve={loaderData.van}>
-          {(currentVan) => (
-            <div className="host-van-detail-layout-container">
-              <div className="host-van-detail">
+      {/* <React.Suspense fallback={<h2>Loading...</h2>}> */}
+        {/* <Await resolve={loaderData.van}> */}
+          {/* {(currentVan) => ( */}
+            <div className={css.host_van_detail_layout_container}>
+              <div className={css.host_van_detail}>
                 <img src={currentVan.imageUrl} alt="" />
-                <div className="host-van-detail-info-text">
+                <div className={css.host_van_detail_info_text}>
                   <i className={`van-type van-type-${currentVan.type}`}>
                     {currentVan.type}
                   </i>
@@ -43,7 +55,7 @@ export default function DetailLayout() {
                 </div>
               </div>
 
-              <nav className="host-van-detail-nav">
+              <nav className={css.host_van_detail_nav}>
                 <NavLink
                   to="."
                   end
@@ -68,9 +80,9 @@ export default function DetailLayout() {
               <Outlet context={{ currentVan }} />
 
             </div>
-          )}
-        </Await>
-      </React.Suspense>
+          {/* )} */}
+        {/* </Await> */}
+      {/* </React.Suspense> */}
     </section>
   );
 }

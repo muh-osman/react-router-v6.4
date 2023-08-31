@@ -72,6 +72,10 @@ img.graph {
   max-width: 500px;
 }
 
+.info {
+  margin: 6px 0;
+}
+
 .host-income .info-header > p {
   color: #4d4d4d;
 }

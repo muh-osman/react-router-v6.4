@@ -20,7 +20,7 @@ export default function Income() {
       <h2>$2,260</h2>
       <img
         className="graphs"
-        src={require("../assets/images/income-graph.png")}
+        src={require("../../assets/images/income-graph.png")}
         alt="Income graph"
       />
       <div className="info-header">

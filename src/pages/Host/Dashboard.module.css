@@ -52,6 +52,41 @@
 }
 
 .card {
-    background-color: #fff;
-    margin-bottom: 10px;
+  background-color: #fff;
+  margin-bottom: 10px;
+  background-color: #fff7ed;
+}
+
+.host_van_single {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 16px;
+  border-radius: 7px;
+  background-color: #fff;
+}
+
+.host_van_single h3 {
+  text-wrap: nowrap;
+  background-color: #fff;
+}
+
+.host_van_single a {
+  text-align: end;
+  width: 100%;
+}
+
+.host_van_single p {
+  color: #4d4d4d;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.host_van_single img {
+  width: 50px;
+  border-radius: 3px;
+}
+
+.host_van_info {
+  margin-left: 12px;
 }
