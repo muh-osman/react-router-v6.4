@@ -1,5 +1,5 @@
 // React & React router
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Link, useLoaderData, defer, Await } from "react-router-dom";
 // CSS
 import css from "./Dashboard.module.css";
@@ -8,31 +8,38 @@ import { getHostVans } from "../../api";
 // Protect Route
 import { requireAuth } from "../../utils";
 
-export const loader = async ({ request }) => {
-  await requireAuth({ request });
-  return defer({ vans: getHostVans() });
-};
+// export const loader = async ({ request }) => {
+//   await requireAuth({ request });
+//   return defer({ vans: getHostVans() });
+// };
 
 export default function Dashboard() {
-  const dataPromise = useLoaderData();
+  // const dataPromise = useLoaderData();
 
-  function renderVanElements(vans) {
-    const hostVansEls = vans.map((van) => (
-      <div className={css.host_van_single} key={van.id}>
-        <img src={van.imageUrl} alt={van.name} />
-        <div className={css.host_van_info}>
-          <h3>{van.name}</h3>
-          <p>${van.price}/day</p>
-        </div>
-        <Link to={`vans/${van.id}`}>View</Link>
+  const [vans, setVans] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const vansData = await getHostVans();
+      setVans(vansData);
+    }
+
+    fetchData();
+  }, []);
+
+  // function renderVanElements(vans) {
+  const hostVansEls = vans.map((van) => (
+    <div className={css.host_van_single} key={van.id}>
+      <img src={van.imageUrl} alt={van.name} />
+      <div className={css.host_van_info}>
+        <h3>{van.name}</h3>
+        <p>${van.price}/day</p>
       </div>
-    ));
-    return (
-      <>
-        <div className={css.card}>{hostVansEls}</div>
-      </>
-    );
-  }
+      <Link to={`vans/${van.id}`}>View</Link>
+    </div>
+  ));
+
+  // }
 
   return (
     <article className={css.container}>
@@ -56,12 +63,15 @@ export default function Dashboard() {
           <Link to="vans">View all</Link>
         </div>
 
-          <Suspense fallback={<h1>Loading...</h1>} >
+        {/* <Suspense fallback={<h1>Loading...</h1>} >
                 <Await resolve={dataPromise.vans}>
                   {renderVanElements}
                 </Await>
-          </Suspense>
+          </Suspense> */}
 
+        <div className={css.card}>
+          {vans.length > 0 ? hostVansEls : <h1 style={{textAlign: "center"}}>Loading..</h1>}
+        </div>
       </div>
     </article>
   );

@@ -1,6 +1,7 @@
 .container {
   background-color: #fff7ed;
   padding: 16px;
+  min-height: 409px;
 }
 .container span {
   color: #201f1d;
@@ -13,6 +14,7 @@
   display: flex;
   align-items: center;
   gap: 16px;
+  height: 145px;
 }
 
 .host_van_detail_info_text  {

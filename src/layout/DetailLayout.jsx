@@ -1,5 +1,5 @@
-import React from "react";
-import css from "./DetailLayout.module.css"
+import React, { useEffect, useState } from "react";
+import css from "./DetailLayout.module.css";
 import {
   useParams,
   useLoaderData,
@@ -15,18 +15,29 @@ import { getHostVans } from "../api";
 import { requireAuth } from "../utils";
 // import { getVan } from "../api/firebase";
 
-
 // export function loader({ params }) {
 //   return defer({ van: getVan(params.id) });
 // }
 
-export async function loader({ params }) {
-  await requireAuth()
-  return getHostVans(params.id);
-}
+// export async function loader({ params }) {
+//   await requireAuth()
+//   return getHostVans(params.id);
+// }
 
 export default function DetailLayout() {
-  const currentVan = useLoaderData();
+  // const currentVan = useLoaderData();
+
+  const [currentVan, setCurrentVan] = useState(null);
+  const { id } = useParams();
+
+  useEffect(() => {
+    async function fetchData() {
+      const vansData = await getHostVans(id);
+      setCurrentVan(vansData);
+    }
+
+    fetchData();
+  }, []);
 
 
   const activeStyles = {
@@ -37,51 +48,56 @@ export default function DetailLayout() {
 
   return (
     <section className={css.container}>
-       <Link to=".." relative="path" className="back-button">
+      <Link to="/host/vans" className="back-button">
         &larr; <span>Back to all vans</span>
       </Link>
       {/* <React.Suspense fallback={<h2>Loading...</h2>}> */}
-        {/* <Await resolve={loaderData.van}> */}
-          {/* {(currentVan) => ( */}
-            <div className={css.host_van_detail_layout_container}>
-              <div className={css.host_van_detail}>
-                <img src={currentVan.imageUrl} alt="" />
-                <div className={css.host_van_detail_info_text}>
-                  <i className={`van-type van-type-${currentVan.type}`}>
-                    {currentVan.type}
-                  </i>
-                  <h3>{currentVan.name}</h3>
-                  <h4>${currentVan.price}/day</h4>
-                </div>
-              </div>
+      {/* <Await resolve={loaderData.van}> */}
+      {/* {(currentVan) => ( */}
 
-              <nav className={css.host_van_detail_nav}>
-                <NavLink
-                  to="."
-                  end
-                  style={({ isActive }) => (isActive ? activeStyles : null)}
-                >
-                  Details
-                </NavLink>
-                <NavLink
-                  to="pricing"
-                  style={({ isActive }) => (isActive ? activeStyles : null)}
-                >
-                  Pricing
-                </NavLink>
-                <NavLink
-                  to="photos"
-                  style={({ isActive }) => (isActive ? activeStyles : null)}
-                >
-                  Photos
-                </NavLink>
-              </nav>
-
-              <Outlet context={{ currentVan }} />
-
+      {currentVan? (
+        <div className={css.host_van_detail_layout_container}>
+          <div className={css.host_van_detail}>
+            <img src={currentVan.imageUrl} alt="" />
+            <div className={css.host_van_detail_info_text}>
+              <i className={`van-type van-type-${currentVan.type}`}>
+                {currentVan.type}
+              </i>
+              <h3>{currentVan.name}</h3>
+              <h4>${currentVan.price}/day</h4>
             </div>
-          {/* )} */}
-        {/* </Await> */}
+          </div>
+
+          <nav className={css.host_van_detail_nav}>
+            <NavLink
+              to="."
+              end
+              style={({ isActive }) => (isActive ? activeStyles : null)}
+            >
+              Details
+            </NavLink>
+            <NavLink
+              to="pricing"
+              style={({ isActive }) => (isActive ? activeStyles : null)}
+            >
+              Pricing
+            </NavLink>
+            <NavLink
+              to="photos"
+              style={({ isActive }) => (isActive ? activeStyles : null)}
+            >
+              Photos
+            </NavLink>
+          </nav>
+
+          <Outlet context={{ currentVan }} />
+        </div>
+      ) : (
+        <h1 style={{textAlign: "center"}}>Loading..</h1>
+      )}
+
+      {/* )} */}
+      {/* </Await> */}
       {/* </React.Suspense> */}
     </section>
   );

@@ -1,25 +1,39 @@
 // React & React router
-import { useEffect } from "react";
-import { Link, useLocation, useLoaderData } from "react-router-dom";
+import { useEffect, useState } from "react";
+import {
+  Link,
+  useLocation,
+  useLoaderData,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 // CSS
 import css from "./VanDetail.module.css";
 // API
 import { getVans } from "../../api";
 
-
-
-export const loader = ({ params }) => {
-  return getVans(params.id);
-};
+// export const loader = ({ params }) => {
+//   return getVans(params.id);
+// };
 
 export default function VanDetail(props) {
   let location = useLocation();
   const urlParam = location.state?.paramType;
 
-  const van = useLoaderData();
+  // const van = useLoaderData();
+
+  const { id } = useParams();
+  const [van, setVan] = useState(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    async function fetchData() {
+      const vanData = await getVans(id);
+      setVan(vanData);
+    }
+
+    fetchData();
   }, []);
 
   return (
@@ -44,28 +58,32 @@ export default function VanDetail(props) {
         Back to {urlParam ? urlParam : "all"} vans
       </Link>
 
-      <div className={css.box}>
-        <img src={van.imageUrl} alt="" />
-        <button
-          style={{
-            backgroundColor:
-              van.type === "simple"
-                ? "#E17654"
-                : van.type === "rugged"
-                ? "#115E59"
-                : "#161616",
-          }}
-        >
-          {van.type}
-        </button>
-        <h3>{van.name}</h3>
-        <h4>
-          ${van.price}
-          <span>/day</span>
-        </h4>
-        <p>{van.description}</p>
-        <button className={css.rent_btn}>Rent this van</button>
-      </div>
+      {!van ? (
+        <h1 className={css.loadding}>Loading..</h1>
+      ) : (
+        <div className={css.box}>
+          <img src={van.imageUrl} alt="" />
+          <button
+            style={{
+              backgroundColor:
+                van.type === "simple"
+                  ? "#E17654"
+                  : van.type === "rugged"
+                  ? "#115E59"
+                  : "#161616",
+            }}
+          >
+            {van.type}
+          </button>
+          <h3>{van.name}</h3>
+          <h4>
+            ${van.price}
+            <span>/day</span>
+          </h4>
+          <p>{van.description}</p>
+          <button className={css.rent_btn}>Rent this van</button>
+        </div>
+      )}
     </article>
   );
 }
