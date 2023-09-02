@@ -31,6 +31,8 @@ export default function DetailLayout() {
   const { id } = useParams();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     async function fetchData() {
       const vansData = await getHostVans(id);
       setCurrentVan(vansData);

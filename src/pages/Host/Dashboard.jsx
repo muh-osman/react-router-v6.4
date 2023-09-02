@@ -19,6 +19,8 @@ export default function Dashboard() {
   const [vans, setVans] = useState([]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     async function fetchData() {
       const vansData = await getHostVans();
       setVans(vansData);

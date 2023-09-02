@@ -25,6 +25,7 @@ export default function HostVans() {
 
 
     useEffect(() => {
+      window.scrollTo(0, 0);
     
       async function fetchData() {
         const vansData = await getHostVans();
